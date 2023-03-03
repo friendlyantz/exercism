@@ -18,13 +18,15 @@ class Tournament
     return score_output if prepped_input.first.empty?
 
     update_scores(prepped_input, team_repo)
+    calc_teams_points_and_matches_played(team_repo)
+    format_scores_output(team_repo)
+  end
 
+  def self.calc_teams_points_and_matches_played(team_repo)
     team_repo.teams.each do |team|
       team.matches_played = team.wins + team.losses + team.draws
       team.points = team.wins * 3 + team.draws
     end
-
-    format_scores_output(team_repo)
   end
 
   def self.format_scores_output(team_repo)
