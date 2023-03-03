@@ -19,10 +19,18 @@ class Tournament
 
     update_scores(prepped_input, team_repo)
 
-    team_repo.sort_teams_by_name.each do |team|
+    team_repo.teams.each do |team|
       team.matches_played = team.wins + team.losses + team.draws
       team.points = team.wins * 3 + team.draws
+    end
 
+    format_scores_output(team_repo)
+  end
+
+  def self.format_scores_output(team_repo)
+    score_output = ''
+
+    team_repo.sort_teams_by_score.each do |team|
       score_output << <<~HEREDOC
         #{team.name.ljust(31)}|  #{team.matches_played} |  #{team.wins} |  #{team.draws} |  #{team.losses} |  #{team.points}
       HEREDOC
@@ -93,7 +101,9 @@ class TeamRepository
     teams.find { |team| team.name == name }
   end
 
-  def sort_teams_by_name
-    teams.sort_by { |team| team.name }
+  def sort_teams_by_score
+    teams.sort_by { |team| team.points }.reverse
+
+    # binding.pry
   end
 end
