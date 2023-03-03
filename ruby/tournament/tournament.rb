@@ -104,8 +104,16 @@ class TeamRepository
   end
 
   def sort_teams_by_score
-    teams.sort_by { |team| team.points }.reverse
+    teams.sort do |team_1, team_2|
+      if team_1.points > team_2.points
+        1
 
-    # binding.pry
+      elsif team_1.points < team_2.points
+        -1
+      elsif team_1.points == team_2.points
+        team_2.name <=> team_1.name
+      end
+      # team_1.points <=> team_2.points
+    end.reverse
   end
 end
