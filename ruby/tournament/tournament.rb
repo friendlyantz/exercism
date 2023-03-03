@@ -1,4 +1,3 @@
-require 'pry'
 class Tournament
   def self.tally(input)
     header + team_scores(input)
@@ -33,9 +32,15 @@ class Tournament
     score_output = ''
 
     team_repo.sort_teams_by_score.each do |team|
-      score_output << <<~HEREDOC
-        #{team.name.ljust(31)}|#{format('%3d', team.matches_played)} |#{format('%3d', team.wins)} |#{format('%3d', team.draws)} |#{format('%3d', team.losses)} |#{format('%3d', team.points)}
-      HEREDOC
+      devider = ' |'
+      score_output << (
+        team.name.ljust(30) + devider +
+        format('%3d', team.matches_played) + devider +
+        format('%3d', team.wins) + devider +
+        format('%3d', team.draws) + devider +
+        format('%3d', team.losses) + devider +
+        format('%3d', team.points) + "\n"
+      )
     end
 
     score_output
@@ -107,13 +112,11 @@ class TeamRepository
     teams.sort do |team_1, team_2|
       if team_1.points > team_2.points
         1
-
       elsif team_1.points < team_2.points
         -1
       elsif team_1.points == team_2.points
         team_2.name <=> team_1.name
       end
-      # team_1.points <=> team_2.points
     end.reverse
   end
 end
