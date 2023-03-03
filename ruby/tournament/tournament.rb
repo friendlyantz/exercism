@@ -19,7 +19,7 @@ class Tournament
 
     update_scores(prepped_input, team_repo)
 
-    team_repo.teams.each do |team|
+    team_repo.sort_teams_by_name.each do |team|
       team.matches_played = team.wins + team.losses + team.draws
       team.points = team.wins * 3 + team.draws
 
@@ -91,5 +91,9 @@ class TeamRepository
 
   def find_team(name)
     teams.find { |team| team.name == name }
+  end
+
+  def sort_teams_by_name
+    teams.sort_by { |team| team.name }
   end
 end
