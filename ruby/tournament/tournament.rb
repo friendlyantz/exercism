@@ -34,7 +34,7 @@ class Tournament
 
     team_repo.sort_teams_by_score.each do |team|
       score_output << <<~HEREDOC
-        #{team.name.ljust(31)}|  #{team.matches_played} |  #{team.wins} |  #{team.draws} |  #{team.losses} |  #{team.points}
+        #{team.name.ljust(31)}|#{format('%3d', team.matches_played)} |#{format('%3d', team.wins)} |#{format('%3d', team.draws)} |#{format('%3d', team.losses)} |#{format('%3d', team.points)}
       HEREDOC
     end
 
