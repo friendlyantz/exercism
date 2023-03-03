@@ -10,11 +10,11 @@ class Tournament
   end
 
   def self.team_scores(input)
-    score_output = ''
     prepped_input = prep_input(input)
-    team_repo = TeamRepository.new
 
-    return score_output if prepped_input.first.empty?
+    return '' if prepped_input.first.empty?
+
+    team_repo = TeamRepository.new
 
     update_scores(prepped_input, team_repo)
     calc_teams_points_and_matches_played(team_repo)
@@ -96,16 +96,12 @@ class TeamRepository
   end
 
   def find_or_create_team(name)
-    team = find_team(name)
-    if team.nil?
+    team = teams.find { |team| team.name == name }
+    unless team
       team = Team.new(name)
       teams << team
     end
     team
-  end
-
-  def find_team(name)
-    teams.find { |team| team.name == name }
   end
 
   def sort_teams_by_score
