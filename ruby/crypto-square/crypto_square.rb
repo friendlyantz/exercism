@@ -21,18 +21,11 @@ class Crypto
 
   def define_size_of_square(data)
     min_area = data.length
-    c = 1
-    r = 1
-
-    loop do
-      break if (r * c >= min_area) && (c >= r) && (c - r <= 1)
-
-      c += 1
-      break if (r * c >= min_area) && (c >= r) && (c - r <= 1)
-
-      r += 1
+    1.upto(Float::INFINITY) do |i|
+      c = i
+      r = (min_area / c.to_f).ceil
+      return [r, c] if (r * c >= min_area) && (c >= r) && (c - r <= 1)
     end
-    [r, c]
   end
 
   def normalize_data(data, max_line_length)
