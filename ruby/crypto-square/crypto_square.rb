@@ -23,7 +23,7 @@ class Crypto
     min_area = data.length
     1.upto(Float::INFINITY) do |i|
       c = i
-      r = (min_area / c.to_f).ceil
+      r = (min_area + c - 1) / c
       return [r, c] if (r * c >= min_area) && (c >= r) && (c - r <= 1)
     end
   end
