@@ -11,11 +11,25 @@ class LocomotiveEngineer
     new_order.insert(1, *missing_wagons)
   end
 
-  def self.add_missing_stops
-    [1, 8, 6, 15, 4, 2]
+  def self.add_missing_stops(itenary, *args)
+    # itenary[:stops] = args[1].values # this is too easy as per description????
+
+    itenary[:stops] = []
+
+    return itenary if args.nil?
+
+    args.each do |hash|
+      itenary[:stops] += hash.values
+    end
+    itenary
   end
 
-  def self.extend_route_information(_route, _more_route_information)
-    [1, 8, 6, 15, 4, 2]
+  def self.extend_route_information(route, more_route_information)
+    # route.merge more_route_information # again this is too easy, and we need to implement unpacking
+
+    more_route_information.each do |key, value|
+      route[key] = value
+    end
+    route
   end
 end
