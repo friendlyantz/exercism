@@ -1,4 +1,3 @@
-require 'pry'
 class ResistorColorDuo
   COLOR_MAP = {
     Black: 0,
@@ -12,9 +11,9 @@ class ResistorColorDuo
     Grey: 8,
     White: 9
   }
-              # .transform_keys { |k| k.to_s.downcase }
-              # .transform_values { |v| v.to_s.downcase }
-              .map { |k,v| [k.to_s.downcase, v.to_s.downcase]}.to_h
+              .transform_keys { |k| k.to_s.downcase }
+              .transform_values { |v| v.to_s.downcase }
+              # .map { |k,v| [k.to_s.downcase, v.to_s.downcase]}.to_h #what style is better?
               .freeze
 
   def self.value(input)
