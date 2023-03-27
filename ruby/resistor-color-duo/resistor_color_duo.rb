@@ -11,16 +11,10 @@ class ResistorColorDuo
     Grey: 8,
     White: 9
   }
-              .transform_keys { |k| k.to_s.downcase }
-              .transform_values { |v| v.to_s.downcase }
-              # .map { |k,v| [k.to_s.downcase, v.to_s.downcase]}.to_h #what style is better?
+              .map { |k,v| [k.to_s.downcase, v.to_s.downcase]}.to_h
               .freeze
 
-  def self.value(input)
-    input
-      .first(2)
-      .map { |color| COLOR_MAP[color] }
-      .join
-      .to_i
+  def self.value(colour_pair)
+    (COLOR_MAP[colour_pair[0]] + COLOR_MAP[colour_pair[1]]).to_i
   end
 end
