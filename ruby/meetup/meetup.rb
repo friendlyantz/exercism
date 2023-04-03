@@ -1,5 +1,5 @@
 require 'date'
-require 'pry'
+
 class Meetup
   def initialize(month, year)
     @month = month
@@ -16,7 +16,7 @@ class Meetup
     sunday: 7
   }
 
-  DESCRIPTO_DAY_NUMS = {
+  DESCRIPTOR_DAY_NUMS = {
     first: 1,
     second: 8,
     third: 15,
@@ -26,13 +26,12 @@ class Meetup
   }
 
   def day(weekday, weekday_descriptor)
-    date = Date.new(@year, @month, DESCRIPTO_DAY_NUMS[weekday_descriptor])
-    day = WEEKDAY_NUMS[weekday]
-    until date.cwday == day
+    date = Date.new(@year, @month, DESCRIPTOR_DAY_NUMS[weekday_descriptor])
+    until date.cwday == WEEKDAY_NUMS[weekday]
       date = case weekday_descriptor
              when :last
                date.prev_day
-             else
+             when *DESCRIPTOR_DAY_NUMS.except(:last).keys
                date.next_day
              end
     end
