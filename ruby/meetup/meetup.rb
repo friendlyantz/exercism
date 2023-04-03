@@ -1,6 +1,5 @@
 require 'date'
 require 'pry'
-
 class Meetup
   def initialize(month, year)
     @month = month
@@ -8,31 +7,36 @@ class Meetup
   end
 
   WEEKDAY_NUMS = {
-    sunday: 0,
     monday: 1,
     tuesday: 2,
     wednesday: 3,
     thursday: 4,
     friday: 5,
-    saturday: 6
+    saturday: 6,
+    sunday: 7
   }
 
-  POSITIONS = {
-    first: 0,
-    second: (7 - 1),
-    third: (14 - 1),
-    fourth: (21 - 1),
-    last: -> { 'ladida' },
-    teenth: (12 - 1)
+  DESCRIPTO_DAY_NUMS = {
+    first: 1,
+    second: 8,
+    third: 15,
+    fourth: 22,
+    last: -1,
+    teenth: 13
   }
 
-  def day(weekday, weekday_pos)
-    date = Date.new(@year, @month)
+  def day(weekday, weekday_descriptor)
+    date = Date.new(@year, @month, DESCRIPTO_DAY_NUMS[weekday_descriptor])
     day = WEEKDAY_NUMS[weekday]
-    pos = POSITIONS[weekday_pos]
+    until date.cwday == day
+      date = case weekday_descriptor
+             when :last
+               date.prev_day
+             else
+               date.next_day
+             end
+    end
 
-    date += pos
-    date = date.next_day until date.wday == day
     date
   end
 end
