@@ -1,28 +1,16 @@
-# RAW_INPUT = File.read(File.join(__dir__, 'input'))
+RAW_INPUT = File.read(File.join(__dir__, 'input'))
 
-# File.open('./preped_input.rb', 'w') do |file|
-#   file.write(
-#     'BAND_INDEX = ' + RAW_INPUT
-#         .split("\n")
-#         .map { |line| line.split(': ') }.to_h
-#         .transform_keys { |k| k.to_s.downcase }
-#         .inspect
-#   )
-# end
+File.open('./preped_input.rb', 'w') do |file|
+  file.write(
+    'BAND_INDEX = ' + RAW_INPUT
+        .split("\n")
+        .map { |line| line.split(': ') }.to_h
+        .transform_keys { |k| k.to_s.downcase }
+        .inspect
+  )
+end
 
-# require './preped_input'
-BAND_INDEX = {
-  'black' => '0',
-  'brown' => '1',
-  'red' => '2',
-  'orange' => '3',
-  'yellow' => '4',
-  'green' => '5',
-  'blue' => '6',
-  'violet' => '7',
-  'grey' => '8',
-  'white' => '9'
-}
+require './preped_input'
 
 class ResistorColorDuo
   def self.value(colour_pair)
