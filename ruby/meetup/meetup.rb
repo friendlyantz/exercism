@@ -31,7 +31,7 @@ class Meetup
       date = case weekday_descriptor
              when :last
                date.prev_day
-             when *DESCRIPTOR_DAY_NUMS.except(:last).keys
+             when :first, :second, :third, :fourth, :teenth
                date.next_day
              end
     end
