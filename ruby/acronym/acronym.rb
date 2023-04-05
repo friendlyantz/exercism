@@ -1,7 +1,7 @@
 class Acronym
   def self.abbreviate(input)
     input
-      .split(/[\s-]+/)
+      .split(/\W/)
       .map(&:chr)
       .join
       .upcase
