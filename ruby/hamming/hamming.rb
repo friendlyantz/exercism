@@ -1,7 +1,11 @@
-=begin
-Write your code for the 'Hamming' exercise in this file. Make the tests in
-`hamming_test.rb` pass.
+require 'pry'
 
-To get started with TDD, see the `README.md` file in your
-`ruby/hamming` directory.
-=end
+module Hamming
+  module_function
+
+  def compute(strand1, strand2)
+    raise ArgumentError, 'Strands must be the same length' if strand1.length != strand2.length
+
+    strand1.chars.zip(strand2.chars).count { |a, b| a != b }
+  end
+end
