@@ -7,12 +7,24 @@ class Raindrops
 
   class << self
     def convert(number)
-      result = WORD_INDEX
-               .filter { |factor, _sound| (number % factor).zero? }
-               .values
-               .join
-
-      result.empty? ? number.to_s : result
+      new(number).convert
     end
+  end
+
+  attr_reader :number
+
+  def initialize(number)
+    @number = number
+  end
+
+  def convert
+    result.empty? ? number.to_s : result
+  end
+
+  def result
+    WORD_INDEX
+      .filter { |factor, _sound| (number % factor).zero? }
+      .values
+      .join
   end
 end
