@@ -18,7 +18,7 @@ class Raindrops
   end
 
   def convert
-    result.empty? ? number.to_s : result
+    result || number.to_s
   end
 
   def result
@@ -26,5 +26,12 @@ class Raindrops
       .filter { |factor, _sound| (number % factor).zero? }
       .values
       .join
+      .presence
+  end
+end
+
+class String
+  def presence
+    empty? ? nil : self
   end
 end
