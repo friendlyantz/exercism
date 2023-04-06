@@ -1,18 +1,4 @@
-RAW_INPUT = File.read(File.join(__dir__, 'input'))
-
-File.open('./preped_input.rb', 'w') do |file|
-  file.write(
-    'BAND_INDEX = '.concat(
-      RAW_INPUT
-      .lines
-      .map { |line| line.split(': ') }.to_h
-      .map { |k, v| [k.downcase, v.to_i] }.to_h
-      .inspect
-    )
-  )
-end
-
-require './preped_input'
+require './band_ref'
 
 class ResistorColorDuo
   def self.value(colors)
@@ -20,10 +6,14 @@ class ResistorColorDuo
   end
 
   def initialize(colour_pair)
-    @first_colour, @second_colour = colour_pair.first(2)
+    colour_pair
+      .then do |first_colour, second_colour|
+        @first_value = BAND_REF[first_colour].to_s
+        @second_value = BAND_REF[second_colour].to_s
+      end
   end
 
   def to_i
-    "#{BAND_INDEX[@first_colour]}#{BAND_INDEX[@second_colour]}".to_i
+    (@first_value + @second_value).to_i
   end
 end
