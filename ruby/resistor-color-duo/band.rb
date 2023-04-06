@@ -1,4 +1,4 @@
-BAND_REF = {
+BAND = {
   'black' => 0,
   'brown' => 1,
   'red' => 2,
