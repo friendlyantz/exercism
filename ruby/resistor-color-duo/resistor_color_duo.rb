@@ -1,6 +1,8 @@
 require_relative './band'
 
 class ResistorColorDuo
+  FORMAT = "%<tens>s%<ones>s".freeze
+
   def self.value(colors)
     new(colors).to_i
   end
@@ -10,8 +12,9 @@ class ResistorColorDuo
   def initialize(color_pair)
     @value =
       color_pair
-      .take(2)
-      .each_with_object('') { |color, string| string << BAND[color].to_s }
+      .then do |first_color, second_color|
+        FORMAT % { tens: BAND[first_color], ones: BAND[second_color] }
+      end
   end
 
   def to_i
