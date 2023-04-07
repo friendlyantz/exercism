@@ -1,17 +1,17 @@
 require_relative './band'
 
 class ResistorColorDuo
-  attr_reader :value
-
   def self.value(colors)
     new(colors).to_i
   end
 
-  def initialize(colour_pair)
-    colour_pair
-      .then do |first_colour, second_colour|
-        @value = BAND[first_colour].to_s + BAND[second_colour].to_s
-      end
+  attr_reader :value
+
+  def initialize(color_pair)
+    @value =
+      color_pair
+      .take(2)
+      .each_with_object('') { |color, string| string << BAND[color].to_s }
   end
 
   def to_i
