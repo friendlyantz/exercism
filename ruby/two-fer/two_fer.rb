@@ -11,16 +11,20 @@ class TwoFer
     Esparanto: ESPARANTO
   }
 
-  def self.two_fer(name = 'you')
-    new(name).to_s
+  def self.two_fer(name = 'you', language = :English)
+    new(name, language).to_s
   end
+
+  private
 
   attr_reader :name, :language
 
-  def initialize(name, language = :English)
+  def initialize(name, language)
     @name = name
     @language = language
   end
+
+  public
 
   def to_s
     LANGUAGE[language] % { name: name }

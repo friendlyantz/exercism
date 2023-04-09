@@ -19,11 +19,11 @@ class TwoFerTest < Minitest::Test
 
   def test_name_given_in_spanish
     # skip
-    assert_equal 'Uno para Bob, uno para mi.', TwoFer.new('Bob', :Español).to_s
+    assert_equal 'Uno para Bob, uno para mi.', TwoFer.two_fer('Bob', :Español)
   end
 
   def test_name_given_in_esperanto
     # skip
-    assert_equal 'Unu por Bill Murray, unu por mi.', TwoFer.new('Bill Murray', :Esparanto).to_s
+    assert_equal 'Unu por Bill Murray, unu por mi.', TwoFer.two_fer('Bill Murray', :Esparanto)
   end
 end
