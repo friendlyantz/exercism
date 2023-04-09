@@ -1,16 +1,19 @@
 require_relative 'band'
 
 class ResistorColorDuo
+  DISPLAY = '%<tens>s%<ones>s'
+
   def self.value(colors)
     new(colors).to_i
   end
 
   private
 
-  attr_reader :first_color, :second_color
-  attr_reader :value
-
-  DISPLAY = '%<tens>s%<ones>s'
+  attr_reader(
+    :first_color,
+    :second_color,
+    :value
+  )
 
   def initialize(color_pair)
     @first_color, @second_color = color_pair
