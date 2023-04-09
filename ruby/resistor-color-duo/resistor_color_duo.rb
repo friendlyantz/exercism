@@ -1,21 +1,22 @@
-require_relative './band'
+require_relative 'band'
 
 class ResistorColorDuo
-  FORMAT = "%<tens>s%<ones>s".freeze
-
   def self.value(colors)
     new(colors).to_i
   end
 
   attr_reader :value
 
+  private
+
+  DISPLAY = '%<tens>s%<ones>s'
+
   def initialize(color_pair)
-    @value =
-      color_pair
-      .then do |first_color, second_color|
-        FORMAT % { tens: BAND[first_color], ones: BAND[second_color] }
-      end
+    first_color, second_color = color_pair
+    @value = DISPLAY % { tens: BAND[first_color], ones: BAND[second_color] }
   end
+
+  public
 
   def to_i
     value.to_i
