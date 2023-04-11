@@ -1,12 +1,9 @@
 class TwoFer
-  ENGLISH = 'One for %<name>s, one for me.'
-  ESPAÑOL = 'Uno para %<name>s, uno para mi.'
-  ESPARANTO = 'Unu por %<name>s, unu por mi.'
 
   LANGUAGE = {
-    English: ENGLISH,
-    Español: ESPAÑOL,
-    Esparanto: ESPARANTO
+    English: 'One for %<name>s, one for me.',
+    Español: 'Uno para %<name>s, uno para mi.',
+    Esparanto: 'Unu por %<name>s, unu por mi.'
   }
 
   def self.two_fer(name = 'you')
