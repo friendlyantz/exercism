@@ -1,6 +1,8 @@
 require_relative 'resistor'
 
 class ResistorColorDuo
+  include Resistor
+
   DISPLAY = '%<tens>s%<ones>s'
 
   def self.value(colors)
@@ -13,7 +15,7 @@ class ResistorColorDuo
 
   def initialize(color_pair)
     first_color, second_color = color_pair
-    @value = DISPLAY % { tens: Resistor::BAND[first_color], ones: Resistor::BAND[second_color] }
+    @value = DISPLAY % { tens: BAND[first_color], ones: BAND[second_color] }
   end
 
   public
