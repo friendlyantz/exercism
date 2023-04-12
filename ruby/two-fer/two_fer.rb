@@ -1,11 +1,18 @@
 class TwoFer
-
   LANGUAGE = {
     English: 'One for %<name>s, one for me.',
     Español: 'Uno para %<name>s, uno para mi.',
     Esparanto: 'Unu por %<name>s, unu por mi.'
   }
 
+  # Convenience method that will assume "you" is the person we are sharing with,
+  # otherwise will use the name given:
+  #     doctest: Default behavior for our convenience method
+  #     >> TwoFer.two_fer
+  #     => "One for you, one for me."
+  #     doctest: Given a name, 'José' the convenience method will use it.
+  #     >> TwoFer.two_fer('José')
+  #     => "One for José, one for me."
   def self.two_fer(name = 'you')
     new(name).to_s
   end
